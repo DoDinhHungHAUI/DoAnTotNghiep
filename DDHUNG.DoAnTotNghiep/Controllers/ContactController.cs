@@ -10,6 +10,7 @@ namespace DDHUNG.DoAnTotNghiep.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
     }

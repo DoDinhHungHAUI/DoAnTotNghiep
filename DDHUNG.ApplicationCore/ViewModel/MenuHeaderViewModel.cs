@@ -19,5 +19,10 @@ namespace DDHUNG.ApplicationCore.ViewModel
         /// </summary>
         public IList<ProductCategory> ListProductCategory { set; get; }
 
+        /// <summary>
+        /// Số lượng sản phẩm trong giỏ hàng
+        /// </summary>
+        public int? CountCart { get; set; }
+
     }
 }

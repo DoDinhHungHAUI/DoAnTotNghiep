@@ -2,8 +2,19 @@
 @model DDHUNG.ApplicationCore.ViewModel.MenuHeaderViewModel
 
 
+@{ 
+    var userLogin = ViewBag.userLogin as DDHUNG.ApplicationCore.Entity.User;
+}
+
+
+
+
+<link rel="stylesheet" href="/css/CustomCss/HeaderSection.css" />
+
+
+
 <div class="container">
-    <a class="navbar-brand" href="index.html">Vegefoods</a>
+    <a class="navbar-brand" href="/">DDHungMobile</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
     </button>
@@ -28,7 +39,7 @@
 
                                 @foreach (var dropDown in lstDropdowns)
                                 {
-                                    var urlCategory = dropDown.ProductCategoryLink + "-pc" +  ".html";
+                                    var urlCategory = "danh-muc-" + dropDown.ProductCategoryLink + "/" + dropDown.ProductCategoryId;
                                     <a class="dropdown-item" href="/@urlCategory">@dropDown.ProductCategoryName</a>
                                 }
 
@@ -38,21 +49,73 @@
                     }
                     else
                     {
-                        <li class="nav-item"><a href="/@menu.MenuLink" class="nav-link">@menu.MenuHeaderName</a></li>
+                        <li class="nav-item">
+                            <a href="/@menu.MenuLink" class="nav-link">
+                                @menu.MenuHeaderName
+                            </a>
+                        </li>
                     }
                 }
             }
-           
+
+            @if (ViewBag.isLogin)
+            {
+                // Đã đăng nhập
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <span>Xin chào :</span><span class="user-name-login">@userLogin.UserName</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-logout" id="btnLogout">
+                        <span>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span>Đăng xuất</span>
+                    </a>
+                </li>
+
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a href="dang-nhap.html" class="nav-link">
+                        <span>
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </span>
+                        <span>Đăng nhập</span>
+                    </a>
+                </li>
+                    
+                <li class="nav-item">
+                    <a href="dang-ky.html" class="nav-link">
+                        <span>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <span>Đăng ký</span>
+                    </a>
+                </li>
+            }
+
             <li class="nav-item cta cta-colored">
                 <a href="/gio-hang.html" class="nav-link">
                     <span>
                         <!-- class="icon-shopping_cart"-->
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    </span>[0]</a>
+                    </span>
+                    <span id="CountcartItem">[@Model.CountCart]</span>
+                </a>
             </li>
 
         </ul>
     </div>
+</div>
+
+<div class="search-bar">
+    <form method="get" action="/tim-kiem.html">
+        <input id="txtSearch" type="text" name="keyword" placeholder="Tìm kiếm...">
+    </form>
 </div>
 
 

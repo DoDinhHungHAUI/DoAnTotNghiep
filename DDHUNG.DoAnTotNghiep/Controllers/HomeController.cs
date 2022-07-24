@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using DDHUNG.ApplicationCore.Entity;
 using DDHUNG.ApplicationCore.ViewModel;
+using DDHUNG.ApplicationCore.Enum;
+using DDHUNG.ApplicationCore.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace DDHUNG.DoAnTotNghiep.Controllers
 {
@@ -18,6 +21,8 @@ namespace DDHUNG.DoAnTotNghiep.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUserService _userService;
         private readonly IProductService _productService;
+
+
         public HomeController(ILogger<HomeController> logger, IUserService userService, IProductService productService)
         {
             _logger = logger;
@@ -29,12 +34,69 @@ namespace DDHUNG.DoAnTotNghiep.Controllers
         {
             HomeViewModel homeViewModel = new HomeViewModel();
 
-            var products = _productService.GetEntities().Result as List<Product>;
-
-            homeViewModel.ListProduct = products;
+            homeViewModel = _productService.GetProducts().Result;
 
             return View(homeViewModel);
         }
+
+        /// <summary>
+        /// View sau khi tìm kiếm
+        /// </summary>
+        /// <param name="keyword">Text Search</param>
+        /// <param name="page">Trang hiện tại</param>
+        /// <returns></returns>
+        /// DDHung
+        public IActionResult Search(string keyword, int page = 1)
+        {
+            int pageSize = ConfigHelper.pageSize;
+
+            if (HttpContext.Session.GetString(CommonConstant.SessionSearch) == null || HttpContext.Session.GetString(CommonConstant.SessionSearch) == "")
+            {
+                HttpContext.Session.SetString(CommonConstant.SessionSearch, keyword);
+            }
+
+            var keySearch = (keyword == null ? HttpContext.Session.GetString(CommonConstant.SessionSearch) : keyword);
+
+            var productCategoryViewModel =  _productService.getAllProductSearch(keySearch, page, pageSize).Result;
+
+            int totalPage = (int)Math.Ceiling((double)productCategoryViewModel.TotalProducts / pageSize);
+
+            ViewBag.keyword = keyword;
+
+            var paginationSet = new PaginationSet
+            {
+                Item = productCategoryViewModel,    
+                MaxPage = ConfigHelper.MaxPage,
+                Page = page,
+                TotalCount = productCategoryViewModel.TotalProducts,
+                TotalPages = totalPage
+            };
+
+            return View(paginationSet);
+        }
+
+
+        /// <summary>
+        /// View đăng nhập
+        /// </summary>
+        /// <returns></returns>
+        /// DDHung 24/07/2022
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// Đăng ký
+        /// </summary>
+        /// <returns></returns>
+        /// DDHung 24/07/2022
+        public IActionResult Register()
+        {
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {

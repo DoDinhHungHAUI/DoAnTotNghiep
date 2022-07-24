@@ -4,7 +4,7 @@ F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\bin\De
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\bin\Debug\net5.0\DDHUNG.Infrastructure.pdb
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\bin\Debug\net5.0\DDHUNG.ApplicationCore.dll
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\bin\Debug\net5.0\DDHUNG.ApplicationCore.pdb
-F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\obj\Debug\net5.0\DDHUNG.Infrastructure.csprojAssemblyReference.cache
+F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\obj\Debug\net5.0\DDHUNG.Infrastructure.csproj.AssemblyReference.cache
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\obj\Debug\net5.0\DDHUNG.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\obj\Debug\net5.0\DDHUNG.Infrastructure.AssemblyInfoInputs.cache
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.Infrastructure\obj\Debug\net5.0\DDHUNG.Infrastructure.AssemblyInfo.cs

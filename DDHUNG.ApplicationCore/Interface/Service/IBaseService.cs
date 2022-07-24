@@ -36,6 +36,15 @@ namespace DDHUNG.ApplicationCore.Interface.Service
         /// CreatedBy : DDHung (09/07/2022)
         Task<ServiceResult> AddEntity(TEntity entity);
 
+
+        /// <summary>
+        /// Thêm nhiều bản ghi
+        /// </summary>
+        /// <param name="lstEntity">Danh sách bản ghi được parse thành json</param>
+        /// <returns></returns>
+        /// CreatedBy : DDHung (23/07/2022)
+        Task<ServiceResult> AddMultyEntity(string lstEntity);
+
         /// <summary>
         /// Cập nhật một bản ghi
         /// </summary>

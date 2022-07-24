@@ -2,6 +2,7 @@ F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\bin\D
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\bin\Debug\net5.0\DDHUNG.ApplicationCore.dll
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\bin\Debug\net5.0\ref\DDHUNG.ApplicationCore.dll
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\bin\Debug\net5.0\DDHUNG.ApplicationCore.pdb
+F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.csproj.AssemblyReference.cache
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.AssemblyInfoInputs.cache
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.AssemblyInfo.cs
@@ -9,4 +10,3 @@ F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\D
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.dll
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\ref\DDHUNG.ApplicationCore.dll
 F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.pdb
-F:\C#\Đồ Án Tốt Nghiệp\DDHUNG.DoAnTotNghiep\DDHUNG.ApplicationCore\obj\Debug\net5.0\DDHUNG.ApplicationCore.csprojAssemblyReference.cache

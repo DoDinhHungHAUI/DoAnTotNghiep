@@ -9,7 +9,21 @@ namespace DDHUNG.ApplicationCore.ViewModel
 {
     public class HomeViewModel
     {
-        public IList<Product> ListProduct { set; get; }
+        /// <summary>
+        /// List điện thoại mới nhất
+        /// </summary>
+        public IList<Product> PhoneLatests { set; get; }
+
+        /// <summary>
+        /// List Laptop mới nhất
+        /// </summary>
+        public IList<Product> LaptopLatests { set; get; }
+
+        /// <summary>
+        /// Máy tính bảng mới nhất
+        /// </summary>
+        public IList<Product> TabletLatests { set; get; }
+
 
     }
 }

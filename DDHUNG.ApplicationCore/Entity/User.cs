@@ -20,6 +20,16 @@ namespace DDHUNG.ApplicationCore.Entity
         public string UserName { get; set; }
 
         /// <summary>
+        /// Email
+        /// </summary>
+        public string UserEmail { get; set; }
+
+        /// <summary>
+        /// Mật khẩu
+        /// </summary>
+        public string PassWord { get; set; }
+
+        /// <summary>
         /// Điện thoại người dùng
         /// </summary>
         public string UserPhone { get; set; }

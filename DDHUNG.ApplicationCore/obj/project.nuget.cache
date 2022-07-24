@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "x+MCLuRA82P+OEULCcl1xU2KPhkkLxuVhiApoDjy3EIEwq3FACxzW8N6KAYy44Wowvo+MEBZkHsRjjyaZHPx6Q==",
+  "dgSpecHash": "ev7ABlIsEIMYHsBPWvM/CKqwNPXvTalRwniZ7wAFB6lvLJff7F+2AqvFlac75YZmpDxaEhirqHnZFegA528PWA==",
   "success": true,
   "projectFilePath": "F:\\C#\\Đồ Án Tốt Nghiệp\\DDHUNG.DoAnTotNghiep\\DDHUNG.ApplicationCore\\DDHUNG.ApplicationCore.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Dell\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

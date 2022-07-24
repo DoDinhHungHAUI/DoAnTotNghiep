@@ -33,6 +33,13 @@ namespace DDHUNG.ApplicationCore.Interface.Repository
         Task<int> AddEntity(TEntity entity);
 
         /// <summary>
+        /// Thêm nhiều bản ghi
+        /// </summary>
+        /// <param name="lstEntity">Danh sách bản ghi được parse thành json</param>
+        /// <returns></returns>
+        Task<int> AddMultyEntity(string lstEntity);
+
+        /// <summary>
         /// Cập nhật một bản ghi
         /// </summary>
         /// <param name="entity">Bản ghi cần cập nhật</param>

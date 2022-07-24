@@ -1,7 +1,10 @@
-﻿using DDHUNG.ApplicationCore.Entity;
+﻿using DDHUNG.ApplicationCore.Common;
+using DDHUNG.ApplicationCore.Entity;
 using DDHUNG.ApplicationCore.Interface.Service;
 using DDHUNG.ApplicationCore.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +38,32 @@ namespace DDHUNG.DoAnTotNghiep.ViewComponents
 
             menuHeader.ListMenuHeader = menuHeaders;
             menuHeader.ListProductCategory = productCategory;
+
+            var cartJson = HttpContext.Session.GetString(CommonConstant.SessionCart);
+
+            var cartParseJson = new List<ShoppingCartViewModel>();
+
+            if (cartJson != null)
+            {
+                cartParseJson = JsonConvert.DeserializeObject<List<ShoppingCartViewModel>>(cartJson);
+            }
+
+            menuHeader.CountCart = cartParseJson.Sum(x => x.Quantity);
+
+            // Truyền session vào viewBag
+
+            var userJson = HttpContext.Session.GetString(CommonConstant.UserLogin);
+
+            var isLogin = false;
+
+            if (userJson != null)
+            {
+                var userLogin = JsonConvert.DeserializeObject<User>(userJson);
+                ViewBag.userLogin = userLogin;
+                isLogin = true;
+            }
+
+            ViewBag.isLogin = isLogin;
 
             return View(menuHeader);
         }

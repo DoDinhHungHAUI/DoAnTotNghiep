@@ -29,6 +29,10 @@ namespace DDHUNG.DoAnTotNghiep
         {
             services.AddControllersWithViews();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+            });
+
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
@@ -46,6 +50,14 @@ namespace DDHUNG.DoAnTotNghiep
 
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
+
+            services.AddScoped<IFooterProductRepository, FooterProductRepository>();
+            services.AddScoped<IFooterProductService, FooterProductService>();
+
+            services.AddScoped<IProductOrderRepository, ProductOrderRepository>();
+            services.AddScoped<IProductOrderService, ProductOrderService>();
+
+            services.AddScoped<IProductOrderDetailRepository, ProductOrderDetailRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +79,7 @@ namespace DDHUNG.DoAnTotNghiep
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
@@ -74,8 +87,16 @@ namespace DDHUNG.DoAnTotNghiep
 
                 endpoints.MapControllerRoute("contact", "lien-he.html", new { controller = "Contact", action = "Index" });
 
-                endpoints.MapControllerRoute("category", "{ProductCategoryLink}-pc.html", new { controller = "ProductCategory", action = "Index" });
+                endpoints.MapControllerRoute("search", "tim-kiem.html", new { controller = "Home", action = "Search" });
 
+                endpoints.MapControllerRoute("category", "danh-muc-{ProductCategoryLink}/{ProductCategoryId}", new { controller = "ProductCategory", action = "Index" });
+
+                endpoints.MapControllerRoute("product", "san-pham-chi-tiet/{ProductId}.html", new { controller = "Product", action = "Detail" });
+
+                endpoints.MapControllerRoute("login", "dang-nhap.html", new { controller = "Home", action = "Login" });
+
+                endpoints.MapControllerRoute("register", "dang-ky.html", new { controller = "Home", action = "Register" });
+                    
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

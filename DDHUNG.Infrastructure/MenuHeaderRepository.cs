@@ -15,6 +15,7 @@ namespace DDHUNG.Infrastructure
         public MenuHeaderRepository(IConfiguration configuration) : base(configuration)
         {
 
+
         }
         #endregion
     }

@@ -60,7 +60,17 @@ namespace DDHUNG.ApplicationCore.Service
 
         }
 
-
+        /// <summary>
+        /// Thêm nhiều bản ghi
+        /// </summary>
+        /// <param name="lstEntity">Danh sách bản ghi được parse thành json</param>
+        /// <returns></returns>
+        /// CreatedBy : DDHung (23/07/2022)
+        public virtual async Task<ServiceResult> AddMultyEntity(string lstEntity)
+        {
+            _serviceResult.Data = await _baseRepository.AddMultyEntity(lstEntity);
+            return _serviceResult;
+        }
 
         /// <summary>
         /// Lấy danh sách dữ liệu
@@ -99,6 +109,8 @@ namespace DDHUNG.ApplicationCore.Service
 
             return _serviceResult;
         }
+
+       
 
 
         #endregion

@@ -10,11 +10,11 @@
         "projectUniqueName": "F:\\C#\\Đồ Án Tốt Nghiệp\\DDHUNG.DoAnTotNghiep\\DDHUNG.ApplicationCore\\DDHUNG.ApplicationCore.csproj",
         "projectName": "DDHUNG.ApplicationCore",
         "projectPath": "F:\\C#\\Đồ Án Tốt Nghiệp\\DDHUNG.DoAnTotNghiep\\DDHUNG.ApplicationCore\\DDHUNG.ApplicationCore.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
         "outputPath": "F:\\C#\\Đồ Án Tốt Nghiệp\\DDHUNG.DoAnTotNghiep\\DDHUNG.ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -54,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.410\\RuntimeIdentifierGraph.json"
         }
       }
     }

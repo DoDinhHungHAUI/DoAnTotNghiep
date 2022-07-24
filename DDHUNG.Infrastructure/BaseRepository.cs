@@ -87,6 +87,27 @@ namespace DDHUNG.Infrastructure
 
 
         /// <summary>
+        /// Thêm một bản ghi
+        /// </summary>
+        /// <param name="entity">Bản ghi cần thêm</param>
+        /// <returns>Số lượng bản ghi bị ảnh hưởng</returns>
+        ///  CreatedBy : DDHung (9/11/2021)
+        public virtual async Task<int> AddMultyEntity(string lstEntity) 
+        {
+            var rowAffects = 0;
+
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                rowAffects = await _dbConnection.ExecuteAsync($"Proc_InsertMulty{_tableName}", new { lstEntity }, commandType: CommandType.StoredProcedure);
+                transaction.Commit();
+            }
+            return rowAffects;
+        }
+
+
+
+
+        /// <summary>
         /// Xóa một bản ghi
         /// </summary>
         /// <param name="entityId">Id của bản ghi cần xóa</param>

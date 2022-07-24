@@ -13,6 +13,7 @@ namespace DDHUNG.DoAnTotNghiep
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -50,4 +50,39 @@ namespace DDHUNG.ApplicationCore.Enum
         Delete = 3
 
     }
+
+    /// <summary>
+    /// Loại sản phẩm
+    /// </summary>
+    public enum TypeProduct
+    {
+        /// <summary>
+        /// Điện thoại
+        /// </summary>
+        Phone = 1,
+        
+        /// <summary>
+        /// Laptop
+        /// </summary>
+        Laptop = 2,
+
+        /// <summary>
+        /// Máy tính bảng
+        /// </summary>
+        Tablet  = 3
+
+
+    }
+
+    /// <summary>
+    /// Phân quyền người dùng
+    /// 1. admin
+    /// 2. User 
+    /// </summary>
+    public enum UserRole
+    {
+        Admin = 1,
+        User = 2
+    }
+
 }

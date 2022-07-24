@@ -32,6 +32,14 @@ namespace DDHUNG.ApplicationCore.Entity
         public Guid CategoryID { get; set; }
 
         /// <summary>
+        /// Loại sản phẩm
+        /// 1.Điện thoại
+        /// 2.Laptop
+        /// 3.Máy tính bảng
+        /// </summary>
+        public int? TypeProduct { get; set; }
+
+        /// <summary>
         /// Hình ảnh sản phẩm
         /// </summary>
         public string Image { get; set; }

@@ -104,9 +104,7 @@ namespace DDHUNG.DoAnTotNghiep.Controllers
         public JsonResult Logout()
         {
             // gán lại session
-
-            HttpContext.Session.SetString(CommonConstant.UserLogin, null);
-
+            HttpContext.Session.Remove(CommonConstant.UserLogin);
             return Json(new
             {
                 status = true

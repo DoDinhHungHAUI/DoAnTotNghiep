@@ -94,7 +94,7 @@ namespace DDHUNG.DoAnTotNghiep.Controllers
         /// DDHung 24/07/2022
         public IActionResult Register()
         {
-            return View();
+            return View();  
         }
 
 

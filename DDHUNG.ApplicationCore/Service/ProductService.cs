@@ -18,12 +18,19 @@ namespace DDHUNG.ApplicationCore.Service
         /// Service Product
         /// </summary>
         private readonly IProductRepository _productRepository;
+
+        /// <summary>
+        /// Service Product
+        /// </summary>
+        private readonly IProductCategoryRepository _productCategoryRepository;
+
         #endregion
 
         #region Constructor
-        public ProductService(IProductRepository customerRepository, IProductRepository productRepository) : base(customerRepository)
+        public ProductService(IProductRepository customerRepository, IProductRepository productRepository, IProductCategoryRepository productCategoryRepository) : base(customerRepository)
         {
             _productRepository = productRepository;
+            _productCategoryRepository = productCategoryRepository;
         }
         #endregion
 
@@ -144,6 +151,45 @@ namespace DDHUNG.ApplicationCore.Service
             var _ = await _productRepository.UpdateEntity(product);
 
             return true;
+        }
+
+
+        /// <summary>
+        /// Lấy danh sách sản phẩm lên cho api
+        /// </summary>
+        /// <returns></returns>
+        public async Task<object> GetApiProducts()
+        {
+            // Lấy danh sách produts
+            var products = await _productRepository.GetEntities();
+
+            // lấy danh sách danh mục sản phẩm
+
+            var productCategories = await _productCategoryRepository.GetEntities();
+
+
+            var productData = products.Join(productCategories, x => new { CategoryID = x.CategoryID }, y => new { CategoryID = y.ProductCategoryId }, (x, y) =>
+            {
+                return new {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Alias = x.Alias,
+                    CategoryID = x.CategoryID,
+                    CategoryName = y.ProductCategoryName,
+                    TypeProduct = x.TypeProduct,
+                    Image = x.Image,
+                    MoreImages = x.MoreImages,
+                    Price = x.Price,
+                    PromotionPrice = x.PromotionPrice,
+                    Warranty = x.Warranty,
+                    Description = x.Description,
+                    Quantity = x.Quantity,
+                    Content = x.Content,
+                };
+
+            }).ToList();
+
+            return productData;
         }
 
         #endregion

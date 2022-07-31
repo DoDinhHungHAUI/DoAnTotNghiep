@@ -20,7 +20,7 @@ namespace DDHUNG.ApplicationCore.Entity
 
         /// <summary>
         /// Thông tin mô tả dữ liệu trả về
-        /// </summary>
+        /// </summary>  
         public string Messeger { get; set; }
 
         /// <summary>

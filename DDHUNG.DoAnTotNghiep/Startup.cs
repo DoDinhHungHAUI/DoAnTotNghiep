@@ -29,6 +29,8 @@ namespace DDHUNG.DoAnTotNghiep
         {
             services.AddControllersWithViews();
 
+            services.AddCors();
+
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
             });
@@ -75,6 +77,16 @@ namespace DDHUNG.DoAnTotNghiep
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
+
 
             app.UseRouting();
 

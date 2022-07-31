@@ -42,6 +42,13 @@ namespace DDHUNG.ApplicationCore.Interface.Service
         Task<bool> SellProduct(Guid? ProductId, int? Quantity);
 
 
+        /// <summary>
+        /// Lấy danh sách sản phẩm lên cho api
+        /// </summary>
+        /// <returns></returns>
+        Task<object> GetApiProducts();
+
+
         #endregion
 
     }

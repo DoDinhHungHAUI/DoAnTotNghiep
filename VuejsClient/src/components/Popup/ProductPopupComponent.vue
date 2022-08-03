@@ -33,6 +33,8 @@
                             v-on:itemComboboxClick = "itemComboboxClick"
                             v-bind:nameToValidate = "'Loại sản phẩm'"
                             v-bind:required = true
+                            v-bind:valueIdItem = "product.CategoryID"
+                            v-bind:isAddOrEdit = "isAddOrEdit"
                         />
 
                         <span class="tooltiptext fixedAssetName-tooltiptext"></span>
@@ -109,12 +111,22 @@
                         <span class="tooltiptext"></span>
                     </div>
                     <div class="input-form first-input-form">
-                        <label>Hình ảnh <span style="color: red;">*</span></label><br />
+                        <!-- <label>Hình ảnh <span style="color: red;">*</span></label><br /> -->
                         <input style="display: none" type="file" ref="fileInput" @change="onFilePicked" />
+
                         <!-- <input 
                             type="text" class="input-popup-right input-text"
                         /> -->
-                        <button type="button" class="btn btn-primary" v-on:click="onPickFile">Chọn hình ảnh</button>
+                        <div class="wrap-uploadImage">
+                           
+                            <button type="button" class="btn btn-primary btn-upload-img" v-on:click="onPickFile">
+                                <i class="fa fa-upload" aria-hidden="true"></i>
+                                <span>Chọn hình ảnh</span>
+                            </button>    
+                             <div class="img-upload">
+                                <img class="image-upload" :src = "srcImage" />
+                            </div>
+                        </div>
                         <span class="tooltiptext fixedAssetName-tooltiptext"></span>
                     </div>
                 </div>
@@ -170,6 +182,7 @@ export default {
         return{
             checkValidate : false,
             product : {
+                ProductId : "",
                 ProductName : "",
                 CategoryID : "",
                 Price : 0,
@@ -180,7 +193,8 @@ export default {
                 Image : "",
                 Content : ""    
             },
-            fileUpload : null
+            fileUpload : null,
+            srcImage : ""
         }
     },
 
@@ -193,6 +207,76 @@ export default {
         },
         listFieldNotValidRequired : {
             type : Array
+        },
+        productEdit : {
+            type:Object
+        }
+    },
+
+    created()
+    {
+        try {            
+            if(this.isAddOrEdit == Enum.FormModel.Edit)
+            {
+                this.product.ProductId = this.productEdit.productId
+                this.product.ProductName = this.productEdit.productName
+                this.product.CategoryID = this.productEdit.categoryID
+                this.product.Price = CommonFunction.formatMoney(this.productEdit.price)
+                this.product.PromotionPrice = CommonFunction.formatMoney(this.productEdit.promotionPrice)
+                this.product.Quantity = this.productEdit.quantity
+                this.product.Warranty = this.productEdit.warranty
+                this.product.Alias = this.productEdit.alias
+                this.product.Image = this.productEdit.image
+                this.product.Content = this.productEdit.content
+                
+                let src = "";
+                switch(this.productEdit.typeProduct) {
+                    case Resource.VN.TypeProduct.Phone:
+                        src = Resource.VN.SrcImage.Phone + this.productEdit.image;
+                        break;
+                    case Resource.VN.TypeProduct.Laptop:
+                        src = Resource.VN.SrcImage.Laptop + this.productEdit.image;
+                        break;
+                    case Resource.VN.TypeProduct.Tablet:
+                        src = Resource.VN.SrcImage.Tablet + this.productEdit.image;
+                        break;
+                    case Resource.VN.TypeProduct.Tivi:
+                        src = Resource.VN.SrcImage.Tivi + this.productEdit.image;
+                        break;
+                    default:
+                        src = "";
+                        break;
+                }
+
+                this.srcImage = src;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        console.log(this.product);
+    },
+
+    mounted(){
+        if(this.isAddOrEdit == Enum.FormModel.Edit || this.isAddOrEdit == Enum.FormModel.Replication){
+            var cbPopups = this.$refs.contentPopup.getElementsByClassName('m-combobox');
+            for(let cbPopup of cbPopups)
+            {
+                var fieldName = cbPopup.getAttribute('nameId');
+                console.log(fieldName);
+                var cbItems = cbPopup.getElementsByClassName('m-combobox-item');
+
+                for(let cbItem of cbItems){
+                    var value = cbItem.getAttribute('value');
+                    if(this.product.CategoryID == value)
+                    {
+                        cbPopup.getElementsByClassName('m-combobox-input')[0].value = cbItem.innerText.toString();
+                        cbItem.classList.add("m-item-selected")
+                        cbItem.innerHTML = Resource.Icon.FaCheck.toString() + cbItem.innerText.toString();
+                        break;
+                    }
+                }
+            } 
         }
     },
 
@@ -207,7 +291,8 @@ export default {
             try {
                 let files = event.target.files;
                 this.fileUpload = files[0];
-                console.log(this.fileUpload);
+                // console.log(this.fileUpload);
+                this.srcImage =  URL.createObjectURL(event.target.files.item(0));
                 
             } catch (error) {
                 console.log(error);
@@ -364,11 +449,27 @@ export default {
                         })
                     }else{
 
-                        // //Confirm trước khi sửa
-                        // this.$emit("confirmSaveInfoFixedAsset" , Resource[Common.LanguageCode].MessageDialogConfirm.ConfirmSaveInfo , true)
+                        let formData = new FormData();
+                        formData.append('formFile',this.fileUpload);
+                        formData.append('product',JSON.stringify(newProduct));
+
+                        axios.put("https://localhost:44397/api/v1/Product/UpdateProduct" , formData, { headers: {'Content-Type': 'multipart/form-data'}})
+                        .then(() => {
+                            this.$emit('hidedDialogProduct');
+                            this.$emit('updateProduct');
+                            this.$emit('showToastSuccess' , ToastJS.successMessage);
+                        })
+                        .catch(error => {
+                            if(error.response.status == 400){
+                                // this.$emit('showDialogNotValid' , error.response.data.Data.userMsg)
+                            }
+                            else{
+                                // this.$emit('showDialogNotValid' ,ToastJS.errorMessage)
+                                // console.log("There was an error!", error);
+                            }
+                        })
+
                         
-                        // //Gửi dữ liệu thay đổi lên Component FixedAssetPage để khi bấm xác nhận lưu thì sẽ lưu dữ liệu đó xuống database
-                        // this.$emit("transmitFixedAsset" , this.fixedAsset) 
                     }
                 }else{
                     

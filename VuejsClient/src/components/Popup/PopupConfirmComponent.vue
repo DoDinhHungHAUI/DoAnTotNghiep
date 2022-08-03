@@ -55,6 +55,16 @@ export default {
             this.$emit("btnNotHideDialogConfirm")
         },
 
+        /**
+         * Method dùng để xóa sản phẩm khi người dùng xác nhận xóa
+         * CreatedBy : DDHung 
+        */
+        btnConfirmDelete : function()
+        {
+            this.$emit("btnConfirmDelete");
+        }
+
+
     }
 }
 </script>

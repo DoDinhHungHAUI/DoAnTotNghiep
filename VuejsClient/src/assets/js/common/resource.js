@@ -56,7 +56,9 @@ export const Resource = {
             DeleteMultipleRecord : function(numberRecordDelete , tableName)
             {
                 return `<span class = "highline-text-confirm">${numberRecordDelete}</span> ${tableName} đã được chọn. Bạn có muốn xóa các ${tableName} này ra khỏi danh sách?`
-            }
+            },
+
+            deleteMessage : "Bạn có muốn xóa sản phẩm này không?"
         },
         MessageDialogValidate : {
             Required : "Cần phải nhập thông tin"

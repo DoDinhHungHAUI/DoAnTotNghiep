@@ -12,7 +12,7 @@
                     Thêm sản phẩm
                 </button>
 
-                <button type="button" class="btn btn-danger btn-delete-product">
+                <button type="button" class="btn btn-danger btn-delete-product" v-on:click = "btnDeleteRecord">
                     <span>
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </span>
@@ -36,6 +36,15 @@ export default {
             this.$emit('showDialogProduct')
             this.$emit('setIsProduct')
         },
+
+        /** 
+         * Sự kiện dùng để xóa các bản ghi được chọn 
+         * CreatedBy : DDHung
+        */
+        btnDeleteRecord : function()
+        {
+            this.$emit("btnDeleteRecord");    
+        },  
     }
 }
 </script>

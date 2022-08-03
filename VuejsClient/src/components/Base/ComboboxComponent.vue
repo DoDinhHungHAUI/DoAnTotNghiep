@@ -47,10 +47,28 @@ export default {
         nameToValidate : {
             type : String
         },
+        valueIdItem : {
+            type : String
+        },
+        isAddOrEdit : {
+            type : Number
+        } 
     },
+
+    created(){
+        if(this.isAddOrEdit == Enum.FormModel.Edit || this.isAddOrEdit == Enum.FormModel.Replication)
+        {
+            var dataItemSelectedCombobox = this.dataCombobox.find(val => val[this.idItem] == this.valueIdItem);
+            this.selected.id = dataItemSelectedCombobox[this.idItem];
+            this.selected.code = dataItemSelectedCombobox[this.codeItem];
+            this.selected.name = dataItemSelectedCombobox[this.nameItem];
+        }
+    },
+
 
     methods :{
 
+        
 
         /**
          * Method xử lý việc select giá trị của combobox
@@ -64,7 +82,7 @@ export default {
             this.$emit('itemComboboxClick' , id,name ,event);
         },
 
-
+    
         /**
          * Method xử lý việc show/Ẩn combobox
          * CreatedBy : DDHung 
@@ -120,7 +138,7 @@ export default {
                     
                 }else{
                     var itemSelected = cbSelected.querySelectorAll(`div[value="${this.selected.id}"]`)[0];
-                    this.itemComboboxClick(this.selected.id , this.selected.code,this.selected.name ,itemSelected);
+                    this.itemComboboxClick(this.selected.id ,this.selected.name ,itemSelected);
                     this.isEventCombobox = Enum.ComboboxModel.Default;
                 }
             }

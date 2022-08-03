@@ -83,6 +83,7 @@ export const CommonFunction = {
     createObjectToAddOrEdit : function(productEdited)
     {
         var newObject = {
+            ProductId : productEdited.ProductId,
             ProductName :productEdited.ProductName,
             CategoryID :productEdited.CategoryID,
             Price :CommonFunction.convertMoneyToNumber(productEdited.Price),
@@ -94,6 +95,16 @@ export const CommonFunction = {
             Content :productEdited.Content,
         }
         return newObject;
+    },
+
+    /**
+     * Method dùng xóa một phần tử trong mảng
+     * CreatedBy : DDHung 
+    */
+    arrayRemove : function(arr, value) { 
+        return arr.filter(function(ele){ 
+            return ele != value; 
+        });
     },
 
 }

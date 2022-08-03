@@ -25,10 +25,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for = "(item, index) in products" :key="item.productId">
+                            <tr v-for = "(item, index) in products" :key="item.productId" :ref = "item.productId">
                                 <th class="checkbox-table">
                                     <input type = "hidden" class = "input-hidden" />
-                                    <input type="checkbox" class = "grid-checkbox">
+                                    <input type="checkbox" class = "grid-checkbox" v-on:click = "btnSeclectedDelete(item.productId,$event)">
                                 </th>
                                 <td class="stt-table align-center">
                                     {{index + 1}}
@@ -50,7 +50,7 @@
                                 </td>
                                 <td class = "wrap-icon-feature">
                                     <div class = "feature"><!--hide-feature-->
-                                        <div class = "edit-record wrap-icongrid-tooltip">
+                                        <div class = "edit-record wrap-icongrid-tooltip" v-on:click = "btnShowDialogToEdit(item.productId)">
                                             <span class="grid-tooltiptext showTooltip-filterbar">Sửa</span>
                                         </div>
                                         <div class = "replication-record wrap-icongrid-tooltip"> 
@@ -59,7 +59,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+                            <LoaderGridComponent v-show = "isShowLoader" />
                         </tbody>
                     </table>
                 </div>
@@ -70,23 +70,93 @@
 
 <script>
 
+import axios from 'axios'
+
+/* Component */
+
+import LoaderGridComponent from '../Base/LoaderGridComponent.vue'
+
 /* File Javascript */
 import { CommonFunction } from '../../assets/js/common/commonFunction'
 import {Resource} from '../../assets/js/common/resource'
+import {Enum} from '../../assets/js/common/Enum'
 
 export default {
     data(){
         return{
-
+            isClickCheckbox : false,
+            listIdSelectedRecord : [],
         }
     },
     props : {
         products : {
             type : Array
+        },
+
+        isShowLoader : {
+            type : Boolean
         }
     },
 
+    components : {
+        LoaderGridComponent
+    },
+
     methods:{
+
+        /**
+         * Method thực hiện việc selected record phục vụ cho việc xóa dữ liệu
+         * createdBy : DDHung
+        */
+        btnSeclectedDelete : function(productId , event)
+        {
+            try {
+                var self = this;
+                this.isClickCheckbox = true;
+                var checkbox =  event.target;
+                var trSelected = self.$refs[productId];
+                if(checkbox.checked)
+                {
+                    trSelected[0].classList.add("selected-record");
+                    this.listIdSelectedRecord.push(productId);
+                }else{
+                    trSelected[0].classList.remove('selected-record')
+                    var newArray = CommonFunction.arrayRemove(this.listIdSelectedRecord , productId);
+                    this.listIdSelectedRecord = newArray;
+                }
+                self.$emit("insertProductIdToListId" , this.listIdSelectedRecord);
+
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        /**
+         * Hàm thực hiện show dialog sản phẩm
+         * CreatedBy : DDHung (30/07/2022)
+        */
+        btnShowDialogToEdit : function(productId)
+        {
+            try {
+                var me = this;
+                me.$emit('passIsAddOrEdit' , Enum.FormModel.Edit)
+                axios.get(Resource.API.Host + Resource.API.Product +  '/' + `${productId}`)
+                .then((res) => {
+                    me.$emit('passProductEdit',  res.data)
+                    me.$emit('showDialogProduct')
+                })  
+                .catch((res) => {
+                    console.log(res)
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
+        /**
+         * Hàm thực hiện check còn sản phẩm hay thiếu sản phẩm
+         * CreatedBy : DDHung (30/07/2022)
+        */
         checkHaveQuantity : function(quantity)
         {
             if(quantity == 0 || quantity == null)
